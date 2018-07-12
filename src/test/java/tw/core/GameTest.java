@@ -4,6 +4,7 @@ package tw.core;/*
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import tw.core.exception.OutOfGuessCountException;
 import tw.core.generator.AnswerGenerator;
 import tw.core.model.GuessResult;
 
@@ -61,5 +62,19 @@ public class GameTest {
         game.guess(Answer.createAnswer("1 2 3 0"));
 
         assertThat(game.checkStatus(), is("fail"));
+    }
+
+    @Test
+    public void should_get_true_when_call_checkCoutinue_given_incorrect_answer() throws Exception {
+        game.guess(Answer.createAnswer("1 2 3 5"));
+
+        assertThat(game.checkCoutinue(), is(true));
+    }
+
+    @Test
+    public void should_get_false_when_call_checkCoutinue_given_correct_answer() throws Exception {
+        game.guess(Answer.createAnswer("1 2 3 4"));
+
+        assertThat(game.checkCoutinue(), is(false));
     }
 }
