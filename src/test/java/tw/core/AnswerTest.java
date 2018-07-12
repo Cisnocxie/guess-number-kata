@@ -60,4 +60,13 @@ public class AnswerTest {
 
         assertThat(record.getValue(), is("2A1B"));
     }
+
+    @Test
+    public void should_get_right_index_when_call_getIndexOfNum_given_a_string() {
+        Answer answer = Answer.createAnswer("1 2 3 4");
+
+        int index = answer.getIndexOfNum("3");
+
+        assertThat(index, is(2));
+    }
 }
