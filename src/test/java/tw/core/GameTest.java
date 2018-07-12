@@ -77,4 +77,11 @@ public class GameTest {
 
         assertThat(game.checkCoutinue(), is(false));
     }
+
+    @Test
+    public void should_get_correct_history_result_when_call_guessHistory_given_an_answer() throws Exception {
+        game.guess(Answer.createAnswer("1 2 3 4"));
+
+        assertThat(game.guessHistory().get(0).getResult(), is("4A0B"));
+    }
 }
