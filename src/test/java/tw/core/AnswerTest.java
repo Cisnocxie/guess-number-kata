@@ -4,6 +4,7 @@ package tw.core;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tw.core.exception.AnswerFormatIncorrectException;
+import tw.core.model.Record;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -39,7 +40,8 @@ public class AnswerTest {
         }
     }
 
-    @Test void should_unsuccess_when_call_validate_given_incorrect_format_answer() {
+    @Test
+    public void should_unsuccess_when_call_validate_given_incorrect_format_answer() {
         Answer answer = Answer.createAnswer("1 1 1 2");
 
         try {
@@ -48,5 +50,14 @@ public class AnswerTest {
         } catch (AnswerFormatIncorrectException e) {
 
         }
+    }
+
+    @Test
+    public void should_get_right_record_when_call_check_given_an_answer() {
+        Answer answer = Answer.createAnswer("1 2 3 4");
+
+        Record record = answer.check(Answer.createAnswer("1 4 3 9"));
+
+        assertThat(record.getValue(), is("2A1B"));
     }
 }
