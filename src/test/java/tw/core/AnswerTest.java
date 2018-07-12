@@ -29,13 +29,24 @@ public class AnswerTest {
     }
 
     @Test
-    public void should_success_when_call_validate_given_right_format_answer() {
+    public void should_success_when_call_validate_given_correct_format_answer() {
         Answer answer = Answer.createAnswer("1 2 3 4");
 
         try {
             answer.validate();
         } catch (AnswerFormatIncorrectException e) {
             fail("should validate success");
+        }
+    }
+
+    @Test void should_unsuccess_when_call_validate_given_incorrect_format_answer() {
+        Answer answer = Answer.createAnswer("1 1 1 2");
+
+        try {
+            answer.validate();
+            fail("should validate unsuccess");
+        } catch (AnswerFormatIncorrectException e) {
+
         }
     }
 }
