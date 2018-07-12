@@ -37,5 +37,29 @@ public class GameTest {
 
     }
 
+    @Test
+    public void should_get_success_status_when_call_checkStatus_given_correct_answer() throws Exception {
+        game.guess(Answer.createAnswer("1 2 3 4"));
 
+        assertThat(game.checkStatus(), is("success"));
+    }
+
+    @Test
+    public void should_get_continue_status_when_call_checkStatus_given_incorrect_answer() throws Exception {
+        game.guess(Answer.createAnswer("5 2 3 4"));
+
+        assertThat(game.checkStatus(), is("continue"));
+    }
+
+    @Test
+    public void should_get_fail_status_when_call_checkStatus_given_guess_times_bigger_than_six() throws Exception {
+        game.guess(Answer.createAnswer("1 2 3 5"));
+        game.guess(Answer.createAnswer("1 2 3 6"));
+        game.guess(Answer.createAnswer("1 2 3 7"));
+        game.guess(Answer.createAnswer("1 2 3 8"));
+        game.guess(Answer.createAnswer("1 2 3 9"));
+        game.guess(Answer.createAnswer("1 2 3 0"));
+
+        assertThat(game.checkStatus(), is("fail"));
+    }
 }
